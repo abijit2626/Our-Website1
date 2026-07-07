@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { ScrollAnimate } from "@/components/ui/ScrollAnimate";
 import { Camera, Image as ImageIcon, Heart, Sparkles, Map, Film } from "lucide-react";
@@ -10,46 +10,83 @@ interface GalleryItem {
   category: string;
   titlePlaceholder: string;
   icon: React.ReactNode;
+  imageSrc: string;
 }
 
-const GALLERY_PLACEHOLDERS: GalleryItem[] = [
+const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "1",
     category: "Dates",
     titlePlaceholder: "Romantic Dinner Date",
     icon: <Heart className="w-6 h-6 text-primary/40" />,
+    imageSrc: "/images/gallery/1.jpg",
   },
   {
     id: "2",
     category: "Travels",
     titlePlaceholder: "Our Travel Highlights",
     icon: <Map className="w-6 h-6 text-primary/40" />,
+    imageSrc: "/images/gallery/2.jpg",
   },
   {
     id: "3",
     category: "Sunsets",
     titlePlaceholder: "Warm Evening Skies",
     icon: <Sparkles className="w-6 h-6 text-primary/40" />,
+    imageSrc: "/images/gallery/3.jpg",
   },
   {
     id: "4",
     category: "Silly Faces",
     titlePlaceholder: "Fun & Laughs Together",
     icon: <Camera className="w-6 h-6 text-primary/40" />,
+    imageSrc: "/images/gallery/4.jpg",
   },
   {
     id: "5",
     category: "Anniversaries",
     titlePlaceholder: "Celebrating Milestones",
     icon: <Film className="w-6 h-6 text-primary/40" />,
+    imageSrc: "/images/gallery/5.jpg",
   },
   {
     id: "6",
     category: "Cozy Days",
     titlePlaceholder: "Lazy Sunday Mornings",
     icon: <ImageIcon className="w-6 h-6 text-primary/40" />,
+    imageSrc: "/images/gallery/6.jpg",
   },
 ];
+
+function GalleryImage({ item }: { item: GalleryItem }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    // Show the placeholder when no image has been uploaded yet
+    return (
+      <div className="w-full h-[78%] rounded-xl bg-primary/5 dark:bg-primary/10 border-2 border-dashed border-primary/20 flex flex-col items-center justify-center text-center px-4 transition-all duration-300 group-hover:bg-primary/10">
+        {item.icon}
+        <span className="text-[10px] uppercase font-bold tracking-wider text-text-primary/60 mt-2 block">
+          Add Your Photo
+        </span>
+        <span className="text-[8px] text-text-secondary opacity-70 mt-1 block">
+          Place in public/images/gallery/{item.id}.jpg
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full h-[78%] rounded-xl overflow-hidden">
+      <img
+        src={item.imageSrc}
+        alt={item.titlePlaceholder}
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        onError={() => setHasError(true)}
+      />
+    </div>
+  );
+}
 
 export function GallerySection() {
   return (
@@ -64,13 +101,13 @@ export function GallerySection() {
             Our Memory Album
           </h2>
           <p className="text-sm text-text-secondary mt-3 max-w-md mx-auto">
-            A digital frame collection awaiting your favorite captured moments.
+            A digital frame collection of your favorite captured moments.
           </p>
         </div>
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {GALLERY_PLACEHOLDERS.map((item, index) => (
+          {GALLERY_ITEMS.map((item, index) => (
             <ScrollAnimate
               key={item.id}
               preset="zoom-in"
@@ -81,16 +118,7 @@ export function GallerySection() {
                 hoverEffect
                 className="group relative overflow-hidden aspect-[4/3] flex flex-col justify-between p-4 border border-border-custom/40"
               >
-                {/* Visual placeholder area */}
-                <div className="w-full h-[78%] rounded-xl bg-primary/5 dark:bg-primary/10 border-2 border-dashed border-primary/20 flex flex-col items-center justify-center text-center px-4 transition-all duration-300 group-hover:bg-primary/10">
-                  {item.icon}
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-text-primary/60 mt-2 block">
-                    Upload Photo
-                  </span>
-                  <span className="text-[8px] text-text-secondary opacity-70 mt-1 block">
-                    Recommended: Landscape Aspect Ratio
-                  </span>
-                </div>
+                <GalleryImage item={item} />
 
                 {/* Footer text */}
                 <div className="h-[18%] flex items-center justify-between px-1">

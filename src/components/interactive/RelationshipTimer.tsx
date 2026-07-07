@@ -26,7 +26,12 @@ export function RelationshipTimer({ startDate = "2024-02-14" }: RelationshipTime
 
   useEffect(() => {
     const calculateTime = () => {
-      const start = new Date(startDate);
+      const parts = startDate.split("-");
+      const start = new Date(
+        parseInt(parts[0], 10),
+        parseInt(parts[1], 10) - 1,
+        parseInt(parts[2], 10)
+      );
       const now = new Date();
 
       if (isNaN(start.getTime())) {

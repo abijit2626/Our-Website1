@@ -67,7 +67,7 @@ export function TimelineSection() {
         </div>
 
         {/* Timeline Path */}
-        <div className="relative border-l-2 border-primary/20 dark:border-primary/10 ml-4 md:ml-1/2 space-y-12">
+        <div className="relative border-l-2 border-primary/20 dark:border-primary/10 ml-4 md:ml-[50%] space-y-12">
           {PLACEHOLDER_MILESTONES.map((item, index) => {
             const isEven = index % 2 === 0;
             // Position classes to alternate sides on desktop
@@ -78,7 +78,7 @@ export function TimelineSection() {
             return (
               <div key={item.id} className="relative w-full min-h-[100px]">
                 {/* Timeline Node Icon Pin */}
-                <div className="absolute top-2 left-[-17px] md:left-1/2 md:translate-x-[-50%] bg-bg-secondary border border-border-custom shadow-md w-8 h-8 rounded-full flex items-center justify-center z-10">
+                <div className="absolute top-2 left-[-17px] bg-bg-secondary border border-border-custom shadow-md w-8 h-8 rounded-full flex items-center justify-center z-10">
                   {item.icon}
                 </div>
 

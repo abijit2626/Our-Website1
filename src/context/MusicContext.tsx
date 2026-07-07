@@ -28,28 +28,15 @@ interface MusicContextType {
   toggleMute: () => void;
 }
 
-// Placeholder audio tracks
+// Add your own music files to public/audio/
+// Place "Snooze" by SZA as: public/audio/snooze-sza.mp3
 const PLACEHOLDER_TRACKS: Track[] = [
   {
     id: "1",
-    title: "Romantic Piano Suite (Placeholder)",
-    artist: "Chamber Ensemble",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // Free demo audio
-    duration: "6:12",
-  },
-  {
-    id: "2",
-    title: "Acoustic Lullaby (Placeholder)",
-    artist: "Guitar Soloist",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", // Free demo audio
-    duration: "7:05",
-  },
-  {
-    id: "3",
-    title: "Dreamy Chill Ambient (Placeholder)",
-    artist: "Synth Waves",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", // Free demo audio
-    duration: "5:44",
+    title: "Snooze",
+    artist: "SZA",
+    url: "/audio/snooze-sza.mp3",
+    duration: "3:21",
   },
 ];
 

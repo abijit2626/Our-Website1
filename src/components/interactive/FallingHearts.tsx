@@ -174,7 +174,6 @@ export function FallingHearts() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full pointer-events-none z-10"
-      style={{ mixBlendMode: "screen" }}
       aria-hidden="true"
     />
   );
