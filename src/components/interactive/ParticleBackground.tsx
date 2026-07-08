@@ -39,9 +39,9 @@ export function ParticleBackground() {
     const getParticleCount = () => {
       // Scale count based on screen width
       if (window.innerWidth < 768) {
-        return 35; // Mobile-friendly density
+        return 18; // Mobile-friendly density
       }
-      return 85;  // Desktop density
+      return 40;  // Desktop density
     };
 
     const initParticles = () => {

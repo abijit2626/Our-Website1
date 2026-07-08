@@ -1,10 +1,52 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { useMusic } from "@/context/MusicContext";
 import { Heart, Play, Calendar, Image as ImageIcon, Sparkles } from "lucide-react";
+
+function HeroPhoto({ src, slot, isVideo }: { src: string; slot: string; isVideo?: boolean }) {
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (isVideo) {
+      const video = document.createElement("video");
+      video.preload = "auto";
+      video.oncanplay = () => setLoaded(true);
+      video.onerror = () => setLoaded(false);
+      video.src = src;
+      video.load();
+    } else {
+      const img = new Image();
+      img.onload = () => setLoaded(true);
+      img.onerror = () => setLoaded(false);
+      img.src = src;
+    }
+  }, [src, isVideo]);
+
+  return (
+    <>
+      {loaded ? (
+        isVideo ? (
+          <video src={src} autoPlay muted loop playsInline className="w-full h-[80%] rounded-2xl object-cover" />
+        ) : (
+          <img src={src} alt="" className="w-full h-[80%] rounded-2xl object-cover" />
+        )
+      ) : (
+        <div className="w-full h-[80%] rounded-2xl bg-primary/5 dark:bg-primary/10 border border-dashed border-primary/20 flex flex-col items-center justify-center text-primary/40 text-center px-4">
+          <ImageIcon className="w-8 h-8 mb-2" />
+          <span className="text-[10px] uppercase font-bold tracking-wider">Photo Placeholder</span>
+          <span className="text-[9px] mt-1 opacity-70">{slot}</span>
+        </div>
+      )}
+      <div className="h-[15%] flex items-center justify-between px-1">
+        <span className="text-[10px] font-semibold text-text-secondary font-mono">{slot}</span>
+        <Heart className="w-3.5 h-3.5 text-primary/40 fill-primary/10" />
+      </div>
+    </>
+  );
+}
 
 export function HeroSection() {
   const { togglePlay, isPlaying } = useMusic();
@@ -131,15 +173,7 @@ export function HeroSection() {
             transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
             className="absolute left-6 top-8 w-44 md:w-56 aspect-[3/4] bg-bg-secondary dark:bg-bg-secondary border border-border-custom/60 rounded-3xl p-3 shadow-xl transform rotate-[-4deg] flex flex-col justify-between"
           >
-            <div className="w-full h-[80%] rounded-2xl bg-primary/5 dark:bg-primary/10 border border-dashed border-primary/20 flex flex-col items-center justify-center text-primary/40 text-center px-4">
-              <ImageIcon className="w-8 h-8 mb-2" />
-              <span className="text-[10px] uppercase font-bold tracking-wider">Photo Placeholder</span>
-              <span className="text-[9px] mt-1 opacity-70">Swap for Memory Card</span>
-            </div>
-            <div className="h-[15%] flex items-center justify-between px-1">
-              <span className="text-[10px] font-semibold text-text-secondary font-mono">Slot 01</span>
-              <Heart className="w-3.5 h-3.5 text-primary/40 fill-primary/10" />
-            </div>
+            <HeroPhoto src="/images/hero/1.mp4" slot="Slot 01" isVideo />
           </motion.div>
 
           {/* Card 2: Secondary Photo Slot (Bottom Right offset) */}
@@ -148,15 +182,7 @@ export function HeroSection() {
             transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1 }}
             className="absolute right-6 bottom-8 w-40 md:w-48 aspect-[1/1] bg-bg-secondary dark:bg-bg-secondary border border-border-custom/60 rounded-3xl p-3 shadow-xl transform rotate-[6deg] flex flex-col justify-between"
           >
-            <div className="w-full h-[75%] rounded-2xl bg-primary/5 dark:bg-primary/10 border border-dashed border-primary/20 flex flex-col items-center justify-center text-primary/40 text-center px-4">
-              <Sparkles className="w-6 h-6 mb-1.5" />
-              <span className="text-[9px] uppercase font-bold tracking-wider">Magic Moment</span>
-              <span className="text-[8px] mt-0.5 opacity-70">Add Partner Image</span>
-            </div>
-            <div className="h-[20%] flex items-center justify-between px-1">
-              <span className="text-[9px] font-semibold text-text-secondary font-mono">Slot 02</span>
-              <Heart className="w-3 h-3 text-primary/40 fill-primary/10" />
-            </div>
+            <HeroPhoto src="/images/hero/2.jpeg" slot="Slot 02" />
           </motion.div>
 
           {/* Ring backdrop element */}

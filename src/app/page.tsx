@@ -32,7 +32,7 @@ export default function Home() {
         <section id="timer" className="py-24 relative overflow-hidden bg-bg-secondary/10">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-3xl bg-primary/3 rounded-full blur-[100px] pointer-events-none -z-10" />
           <ScrollAnimate preset="fade-up" duration={0.8}>
-            <RelationshipTimer startDate="2024-02-14" />
+            <RelationshipTimer startDate="2025-02-02" />
           </ScrollAnimate>
         </section>
 

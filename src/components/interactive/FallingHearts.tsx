@@ -31,7 +31,7 @@ export function FallingHearts() {
 
     let animationFrameId: number;
     let hearts: Heart[] = [];
-    const maxHearts = 40; // Maintain good performance, not too crowded
+    const maxHearts = 20;
 
     const colors = [
       "rgba(219, 39, 119, 0.6)",   // pink-600
