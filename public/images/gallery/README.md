@@ -4,12 +4,12 @@ Place your photos in this folder with the following filenames:
 
 | Filename | Category |
 |---|---|
-| `1.jpg` | Dates – Romantic Dinner Date |
-| `2.jpg` | Travels – Our Travel Highlights |
-| `3.jpg` | Sunsets – Warm Evening Skies |
-| `4.jpg` | Silly Faces – Fun & Laughs Together |
-| `5.jpg` | Anniversaries – Celebrating Milestones |
-| `6.jpg` | Cozy Days – Lazy Sunday Mornings |
+| `1.jpeg` | Dates – Romantic Dinner Date |
+| `2.mp4` | Travels – Our Travel Highlights |
+| `3.mp4` | Sunsets – Warm Evening Skies |
+| `4.mp4` | Silly Faces – Fun & Laughs Together |
+| `5.jpeg` | Anniversaries – Celebrating Milestones |
+| `6.jpeg` | Cozy Days – Lazy Sunday Mornings |
 
 Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`
 
