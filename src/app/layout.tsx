@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Pacifico, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 
@@ -19,6 +19,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Cute handwritten-style script, used for the "Best Girlfriend" award section
+const pacifico = Pacifico({
+  variable: "--font-pacifico",
+  weight: "400",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "For Appu ❤️ | Our Romantic Space",
   description: "A premium interactive space celebrating our relationship milestones, memories, and journey together.",
@@ -32,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${pacifico.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
