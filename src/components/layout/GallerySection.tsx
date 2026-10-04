@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { ScrollAnimate } from "@/components/ui/ScrollAnimate";
 import { Lightbox, type LightboxItem } from "@/components/ui/Lightbox";
+import { asset } from "@/lib/asset";
 import { Camera, Image as ImageIcon, Heart, Sparkles, Map, Film, Expand } from "lucide-react";
 
 interface GalleryItem {
@@ -21,7 +22,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     category: "Dates",
     titlePlaceholder: "Romantic Dinner Date",
     icon: <Heart className="w-6 h-6 text-primary/40" />,
-    imageSrc: "/images/gallery/1.jpeg",
+    imageSrc: asset("/images/gallery/1.jpeg"),
     isVideo: false,
   },
   {
@@ -29,7 +30,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     category: "Travels",
     titlePlaceholder: "Our Travel Highlights",
     icon: <Map className="w-6 h-6 text-primary/40" />,
-    imageSrc: "/images/gallery/2.mp4",
+    imageSrc: asset("/images/gallery/2.mp4"),
     isVideo: true,
   },
   {
@@ -37,7 +38,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     category: "Sunsets",
     titlePlaceholder: "Warm Evening Skies",
     icon: <Sparkles className="w-6 h-6 text-primary/40" />,
-    imageSrc: "/images/gallery/3.mp4",
+    imageSrc: asset("/images/gallery/3.mp4"),
     isVideo: true,
   },
   {
@@ -45,7 +46,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     category: "Silly Faces",
     titlePlaceholder: "Fun & Laughs Together",
     icon: <Camera className="w-6 h-6 text-primary/40" />,
-    imageSrc: "/images/gallery/4.mp4",
+    imageSrc: asset("/images/gallery/4.mp4"),
     isVideo: true,
   },
   {
@@ -53,7 +54,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     category: "Anniversaries",
     titlePlaceholder: "Celebrating Milestones",
     icon: <Film className="w-6 h-6 text-primary/40" />,
-    imageSrc: "/images/gallery/5.jpeg",
+    imageSrc: asset("/images/gallery/5.jpeg"),
     isVideo: false,
   },
   {
@@ -61,7 +62,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     category: "Bowling Days",
     titlePlaceholder: "Bowling Nights",
     icon: <ImageIcon className="w-6 h-6 text-primary/40" />,
-    imageSrc: "/images/gallery/6.jpeg",
+    imageSrc: asset("/images/gallery/6.jpeg"),
     isVideo: false,
   },
 ];

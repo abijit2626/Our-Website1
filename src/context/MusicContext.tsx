@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import { asset } from "@/lib/asset";
 
 export interface Track {
   id: string;
@@ -35,7 +36,7 @@ const PLACEHOLDER_TRACKS: Track[] = [
     id: "1",
     title: "Snooze",
     artist: "SZA",
-    url: "/audio/snooze-sza.mp3",
+    url: asset("/audio/snooze-sza.mp3"),
     duration: "3:21",
   },
 ];
