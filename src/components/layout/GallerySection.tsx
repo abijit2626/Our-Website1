@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { ScrollAnimate } from "@/components/ui/ScrollAnimate";
 import { Lightbox, type LightboxItem } from "@/components/ui/Lightbox";
@@ -68,6 +68,26 @@ const GALLERY_ITEMS: GalleryItem[] = [
 
 function GalleryImage({ item, onClick }: { item: GalleryItem; onClick: () => void }) {
   const [hasError, setHasError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Only play while on screen: saves CPU/battery and bandwidth with several autoplaying clips on the page
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [hasError]);
 
   if (hasError) {
     return (
@@ -86,29 +106,36 @@ function GalleryImage({ item, onClick }: { item: GalleryItem; onClick: () => voi
   return (
     <button
       onClick={onClick}
-      className="w-full h-[78%] rounded-xl overflow-hidden relative cursor-pointer text-left"
+      className="w-full h-[78%] rounded-xl overflow-hidden relative cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg-secondary"
       aria-label={`View ${item.titlePlaceholder}`}
     >
+      {/* Shimmer skeleton: sits behind the media and is simply covered once pixels arrive */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-primary/10 bg-[linear-gradient(110deg,transparent_30%,var(--border-custom)_50%,transparent_70%)] bg-[length:200%_100%] motion-safe:animate-shimmer"
+      />
       {item.isVideo ? (
         <video
+          ref={videoRef}
           src={item.imageSrc}
-          autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          preload="metadata"
+          className="relative w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           onError={() => setHasError(true)}
         />
       ) : (
         <img
           src={item.imageSrc}
           alt={item.titlePlaceholder}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="relative w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           onError={() => setHasError(true)}
         />
       )}
-      <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors duration-300 flex items-center justify-center rounded-xl">
-        <span className="opacity-0 hover:opacity-100 transition-opacity duration-300 p-2 rounded-full bg-white/20 backdrop-blur-sm text-white">
+      {/* Hover/focus affordance is driven by the card (`group`), not by hovering the tiny icon itself */}
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 group-focus-within:bg-black/20 transition-colors duration-300 flex items-center justify-center rounded-xl">
+        <span className="opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 scale-90 group-hover:scale-100 group-focus-within:scale-100 transition-all duration-300 p-2 rounded-full bg-white/25 backdrop-blur-sm text-white">
           <Expand className="w-5 h-5" />
         </span>
       </div>
