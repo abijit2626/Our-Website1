@@ -121,10 +121,12 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
-      audioRef.current.play().catch((err) => {
-        console.warn("Autoplay block: user interaction needed.", err);
-      });
       setIsPlaying(true);
+      audioRef.current.play().catch((err) => {
+        // e.g. autoplay blocked or the audio file is missing: don't show a "playing" UI with no sound
+        console.warn("Playback failed or was blocked.", err);
+        setIsPlaying(false);
+      });
     }
   };
 
